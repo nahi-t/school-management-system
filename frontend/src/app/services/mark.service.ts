@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment, getApiUrl } from '../../environments/environment';
 
 export interface Mark {
   _id: string;              // ✅ FIXED (was id)
@@ -19,7 +19,7 @@ export interface Mark {
   providedIn: 'root'
 })
 export class MarkService {
-  private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/marks' : 'http://localhost:5000/api/marks';
+  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/marks') : 'http://localhost:5000/api/marks';
 
   constructor(private http: HttpClient) {}
 

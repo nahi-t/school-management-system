@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment, getApiUrl } from '../../environments/environment';
 
 /* ============================================
    SUBJECT INTERFACE (MongoDB uses _id)
@@ -19,7 +19,7 @@ export interface Subject {
 })
 export class SubjectService {
 
-  private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/subjects' : 'http://localhost:5000/api/subjects';
+  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/subjects') : 'http://localhost:5000/api/subjects';
 
   constructor(private http: HttpClient) {}
 

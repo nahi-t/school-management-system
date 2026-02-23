@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://school-management-api.onrender.com/api'
+  apiUrl: 'https://school-management-system-swti.onrender.com/api'
 };

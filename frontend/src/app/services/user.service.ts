@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface User {
   _id: string;
@@ -17,7 +18,7 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = 'http://localhost:5000/api/users';
+  private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/users' : 'http://localhost:5000/api/users';
 
   constructor(private http: HttpClient) {}
 

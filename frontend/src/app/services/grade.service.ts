@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Grade {
   _id: string;
@@ -15,7 +16,7 @@ export interface Grade {
   providedIn: 'root'
 })
 export class GradeService {
-  private apiUrl = 'http://localhost:5000/api/grades';
+  private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/grades' : 'http://localhost:5000/api/grades';
 
   constructor(private http: HttpClient) {}
 

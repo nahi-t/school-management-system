@@ -3,9 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 export interface User {
-  id: string;
+  _id: string;
   name: string;
   email: string;
   role: string;
@@ -16,7 +17,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/auth' : 'http://localhost:5000/api/auth';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
 

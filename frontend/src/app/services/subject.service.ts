@@ -19,7 +19,7 @@ export interface Subject {
 })
 export class SubjectService {
 
-  private apiUrl = environment.apiUrl + '/subjects';
+  private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/subjects' : 'http://localhost:5000/api/subjects';
 
   constructor(private http: HttpClient) {}
 

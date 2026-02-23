@@ -30,13 +30,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 /* ================= API ROUTES ================= */
 
-// Debug middleware to log all requests
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-  next();
-});
-
-// Mount API routes
+// Mount API routes BEFORE 404 handler
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/subjects', require('./routes/subjects'));
@@ -51,10 +45,17 @@ console.log('- /api/subjects -> subject routes');
 console.log('- /api/grades -> grade routes');
 console.log('- /api/marks -> mark routes');
 
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
+
 /* =============== PRODUCTION CONFIG =============== */
 
-// Handle 404 for API routes
+// Handle 404 for API routes (AFTER all other routes)
 app.use('/api/*', (req, res) => {
+  console.log('404 for API route:', req.url);
   res.status(404).json({ message: 'API endpoint not found' });
 });
 

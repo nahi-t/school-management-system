@@ -27,6 +27,16 @@ app.use('/api/subjects', require('./routes/subjects'));
 app.use('/api/grades', require('./routes/grades'));
 app.use('/api/marks', require('./routes/marks'));
 
+// Handle 404 for API routes
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ message: 'API endpoint not found' });
+});
+
+// Handle client-side routing for SPA
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

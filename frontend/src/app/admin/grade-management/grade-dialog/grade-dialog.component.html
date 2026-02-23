@@ -21,7 +21,7 @@
       <mat-label>Assigned Teacher</mat-label>
       <mat-select formControlName="assignedTeacher">
         <mat-option value="">No teacher assigned</mat-option>
-        <mat-option *ngFor="let teacher of data.teachers" [value]="teacher.id">
+        <mat-option *ngFor="let teacher of data.teachers" [value]="teacher._id">
           {{ teacher.name }} ({{ teacher.email }})
         </mat-option>
       </mat-select>

@@ -40,7 +40,7 @@ export class GradeDialogComponent implements OnInit {
       this.gradeForm.patchValue({
         name: this.data.grade.name,
         description: this.data.grade.description,
-        assignedTeacher: this.data.grade.assignedTeacher?.id || ''
+        assignedTeacher: this.data.grade.assignedTeacher?._id || ''
       });
     }
   }

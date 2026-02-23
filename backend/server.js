@@ -14,8 +14,8 @@ app.use(cors({
   origin: [
     'https://school-management-system-swti.onrender.com',
     'https://school-management-system-1-sm6u.onrender.com',
-    'https://your-frontend-domain.vercel.app',
-    'https://your-frontend-domain.netlify.app',
+    'https://*.vercel.app',
+    'https://*.netlify.app',
     'http://localhost:4200'
   ],
   credentials: true

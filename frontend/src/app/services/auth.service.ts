@@ -19,7 +19,7 @@ export interface User {
 })
 export class AuthService {
   private apiUrl = environment.production ? 'https://school-management-system-swti.onrender.com/api/auth' : 'http://localhost:5000/api/auth';
-  private currentUserSubject: BehaviorSubject<User | null>;
+  private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   public currentUser: Observable<User | null>;
 
   constructor(
@@ -27,6 +27,7 @@ export class AuthService {
     private router: Router,
     private storageService: StorageService
   ) {
+    this.currentUser = this.currentUserSubject.asObservable();
     this.initializeAuth();
   }
 

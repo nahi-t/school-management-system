@@ -18,7 +18,8 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/users') : getFallbackApiUrl().replace('/api/auth', '/api/users');
+  private apiUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
+  private usersUrl = `${this.apiUrl}/users`;
 
   constructor(private http: HttpClient) {}
 
@@ -42,30 +43,30 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl, { headers: this.getAuthHeaders() });
+    return this.http.get<User[]>(this.usersUrl, { headers: this.getAuthHeaders() });
   }
 
   getUserById(id: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.get<User>(`${this.usersUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
   createUser(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user, { headers: this.getAuthHeaders() });
+    return this.http.post<User>(this.usersUrl, user, { headers: this.getAuthHeaders() });
   }
 
   updateUser(id: string, user: Partial<User>): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${id}`, user, { headers: this.getAuthHeaders() });
+    return this.http.put<User>(`${this.usersUrl}/${id}`, user, { headers: this.getAuthHeaders() });
   }
 
   deleteUser(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.delete<void>(`${this.usersUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
   getTeachers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/teachers`, { headers: this.getAuthHeaders() });
+    return this.http.get<User[]>(`${this.usersUrl}/teachers`, { headers: this.getAuthHeaders() });
   }
 
   getStudents(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/students`, { headers: this.getAuthHeaders() });
+    return this.http.get<User[]>(`${this.usersUrl}/students`, { headers: this.getAuthHeaders() });
   }
 }

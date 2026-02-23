@@ -19,7 +19,8 @@ export interface Mark {
   providedIn: 'root'
 })
 export class MarkService {
-  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/marks') : getFallbackApiUrl().replace('/api/auth', '/api/marks');
+  private apiUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
+  private marksUrl = `${this.apiUrl}/marks`;
 
   constructor(private http: HttpClient) {}
 

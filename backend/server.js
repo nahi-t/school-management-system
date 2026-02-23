@@ -31,11 +31,17 @@ mongoose.connect(process.env.MONGODB_URI)
 /* ================= API ROUTES ================= */
 
 // Mount API routes BEFORE 404 handler
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/users', require('./routes/users'));
-app.use('/api/subjects', require('./routes/subjects'));
-app.use('/api/grades', require('./routes/grades'));
-app.use('/api/marks', require('./routes/marks'));
+const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users');
+const subjectsRouter = require('./routes/subjects');
+const gradesRouter = require('./routes/grades');
+const marksRouter = require('./routes/marks');
+
+app.use('/api/auth', authRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/subjects', subjectsRouter);
+app.use('/api/grades', gradesRouter);
+app.use('/api/marks', marksRouter);
 
 // Debug: Log registered routes
 console.log('API Routes mounted:');
@@ -44,6 +50,10 @@ console.log('- /api/users -> user routes');
 console.log('- /api/subjects -> subject routes');
 console.log('- /api/grades -> grade routes');
 console.log('- /api/marks -> mark routes');
+
+// Debug: Check if routes are properly loaded
+console.log('Auth router routes:', authRouter.stack?.map(layer => layer.route?.path).filter(Boolean));
+console.log('Users router routes:', usersRouter.stack?.map(layer => layer.route?.path).filter(Boolean));
 
 // Debug middleware to log all requests
 app.use((req, res, next) => {
@@ -55,7 +65,7 @@ app.use((req, res, next) => {
 
 // Handle 404 for API routes (AFTER all other routes)
 app.use('/api/*', (req, res) => {
-  console.log('404 for API route:', req.url);
+  console.log('404 for API route:', req.originalUrl);
   res.status(404).json({ message: 'API endpoint not found' });
 });
 

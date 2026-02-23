@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-backend-url.herokuapp.com/api'
+  apiUrl: 'https://school-management-api.onrender.com/api'
 };

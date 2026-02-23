@@ -6,6 +6,9 @@ const { auth } = require('../middleware/auth');
 
 const router = express.Router();
 
+// Debug: Log route registration
+console.log('Auth routes registering: /register, /login');
+
 router.post('/register', [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
@@ -13,6 +16,7 @@ router.post('/register', [
   body('role').isIn(['admin', 'teacher', 'student']).withMessage('Valid role is required')
 ], async (req, res) => {
   try {
+    console.log('Register request received:', req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });

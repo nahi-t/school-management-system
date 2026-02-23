@@ -38,21 +38,18 @@ app.use('/api/marks', require('./routes/marks'));
 
 /* =============== PRODUCTION CONFIG =============== */
 
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '../frontend/dist/school-management');
-
-  // Serve Angular static files
-  app.use(express.static(frontendPath));
-
-  // Angular SPA fallback (VERY IMPORTANT)
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-  });
-}
-
 // Handle 404 for API routes
 app.use('/api/*', (req, res) => {
   res.status(404).json({ message: 'API endpoint not found' });
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'School Management API is running',
+    timestamp: new Date().toISOString()
+  });
 });
 
 /* ================= START SERVER ================= */

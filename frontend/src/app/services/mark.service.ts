@@ -19,8 +19,8 @@ export interface Mark {
   providedIn: 'root'
 })
 export class MarkService {
-  private apiUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
-  private marksUrl = `${this.apiUrl}/marks`;
+  private baseUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
+  private marksUrl = `${this.baseUrl}/marks`;
 
   constructor(private http: HttpClient) {}
 

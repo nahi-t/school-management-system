@@ -19,8 +19,8 @@ export interface Subject {
 })
 export class SubjectService {
 
-  private apiUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
-  private subjectsUrl = `${this.apiUrl}/subjects`;
+  private baseUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
+  private subjectsUrl = `${this.baseUrl}/subjects`;
 
   constructor(private http: HttpClient) {}
 

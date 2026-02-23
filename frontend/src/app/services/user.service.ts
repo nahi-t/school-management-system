@@ -18,8 +18,8 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
-  private usersUrl = `${this.apiUrl}/users`;
+  private baseUrl = environment.production ? getApiUrl() : getFallbackApiUrl();
+  private usersUrl = `${this.baseUrl}/users`;
 
   constructor(private http: HttpClient) {}
 

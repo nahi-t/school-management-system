@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   hidePassword = true;
   isLoading = false;
-  roles = ['admin', 'teacher', 'student'];
 
   constructor(
     private fb: FormBuilder,
@@ -24,8 +23,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['student', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -38,7 +36,9 @@ export class RegisterComponent implements OnInit {
   onSubmit(): void {
     if (this.registerForm.valid) {
       this.isLoading = true;
-      const { name, email, password, role } = this.registerForm.value;
+      const { name, email, password } = this.registerForm.value;
+      // Automatically set role to 'student'
+      const role = 'student';
 
       this.authService.register(name, email, password, role).subscribe({
         next: () => {

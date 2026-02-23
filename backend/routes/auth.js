@@ -12,8 +12,7 @@ console.log('Auth routes registering: /register, /login');
 router.post('/register', [
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('email').isEmail().withMessage('Valid email is required'),
-  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-  body('role').isIn(['admin', 'teacher', 'student']).withMessage('Valid role is required')
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
 ], async (req, res) => {
   try {
     console.log('Register request received:', req.body);
@@ -22,7 +21,9 @@ router.post('/register', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, email, password, role } = req.body;
+    const { name, email, password } = req.body;
+    // Force role to be 'student' for all registrations
+    const role = 'student';
 
     let user = await User.findOne({ email });
     if (user) {

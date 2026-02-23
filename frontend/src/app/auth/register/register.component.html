@@ -44,19 +44,6 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="role">
-            <mat-option *ngFor="let role of roles" [value]="role">
-              {{ role | titlecase }}
-            </mat-option>
-          </mat-select>
-          <mat-icon matSuffix>assignment_ind</mat-icon>
-          <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
-            Role is required
-          </mat-error>
-        </mat-form-field>
-
         <button mat-raised-button color="primary" type="submit" class="full-width" [disabled]="registerForm.invalid || isLoading">
           <span *ngIf="!isLoading">Register</span>
           <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>

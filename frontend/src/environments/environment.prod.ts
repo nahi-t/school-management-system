@@ -6,15 +6,12 @@ export const environment = {
 // Dynamic API URL based on current domain
 export const getApiUrl = () => {
   const currentHost = window.location.origin;
-  console.log('Current host:', currentHost);
   
-  // Handle both production domains
   if (currentHost.includes('school-management-system-1-sm6u.onrender.com')) {
     return 'https://school-management-system-1-sm6u.onrender.com/api';
   } else if (currentHost.includes('school-management-system-swti.onrender.com')) {
     return 'https://school-management-system-swti.onrender.com/api';
   } else {
-    // Fallback to main domain
     return 'https://school-management-system-swti.onrender.com/api';
   }
 };

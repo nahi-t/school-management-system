@@ -51,7 +51,7 @@ export class SubjectService {
   ============================================ */
   getAllSubjects(): Observable<Subject[]> {
     return this.http.get<Subject[]>(
-      this.apiUrl,
+      this.subjectsUrl,
       { headers: this.getAuthHeaders() }
     );
   }
@@ -65,7 +65,7 @@ export class SubjectService {
     }
 
     return this.http.get<Subject>(
-      `${this.apiUrl}/${id}`,
+      `${this.subjectsUrl}/${id}`,
       { headers: this.getAuthHeaders() }
     );
   }
@@ -75,7 +75,7 @@ export class SubjectService {
   ============================================ */
   createSubject(subject: Partial<Subject>): Observable<Subject> {
     return this.http.post<Subject>(
-      this.apiUrl,
+      this.subjectsUrl,
       subject,
       { headers: this.getAuthHeaders() }
     );
@@ -90,7 +90,7 @@ export class SubjectService {
     }
 
     return this.http.put<Subject>(
-      `${this.apiUrl}/${id}`,
+      `${this.subjectsUrl}/${id}`,
       subject,
       { headers: this.getAuthHeaders() }
     );
@@ -105,7 +105,7 @@ export class SubjectService {
     }
 
     return this.http.delete<void>(
-      `${this.apiUrl}/${id}`,
+      `${this.subjectsUrl}/${id}`,
       { headers: this.getAuthHeaders() }
     );
   }

@@ -48,3 +48,108 @@ html, body {
   display: flex;
   gap: 8px;
 }
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  
+  .mat-card {
+    margin-bottom: 12px;
+    border-radius: 8px;
+  }
+  
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .page-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .page-header button {
+    width: 100%;
+    min-height: 48px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .user-table {
+    min-width: 600px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .action-buttons button {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .mat-toolbar {
+    padding: 0 8px;
+  }
+  
+  .mat-toolbar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .role-badge {
+    background: #e0e0e0;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .role-admin {
+    background: #ff5252;
+    color: white;
+  }
+  
+  .role-teacher {
+    background: #448aff;
+    color: white;
+  }
+  
+  .role-student {
+    background: #69f0ae;
+    color: #333;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 8px;
+  }
+  
+  .page-header h1 {
+    font-size: 1.25rem;
+  }
+  
+  .mat-card {
+    margin-bottom: 8px;
+  }
+  
+  .user-table {
+    font-size: 0.875rem;
+  }
+  
+  .mat-header-cell,
+  .mat-cell {
+    padding: 8px 4px;
+  }
+}

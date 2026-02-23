@@ -1,0 +1,58 @@
+.subject-management {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  color: #3f51b5;
+  margin: 0;
+}
+
+.page-header button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.subject-table {
+  width: 100%;
+  min-width: 600px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.no-teacher {
+  color: #666;
+  font-style: italic;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}

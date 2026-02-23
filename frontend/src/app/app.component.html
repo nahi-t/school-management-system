@@ -1,0 +1,22 @@
+<mat-toolbar color="primary" class="app-header">
+  <span>{{ title }}</span>
+  <span class="spacer"></span>
+  
+  <div *ngIf="isLoggedIn()" class="user-info">
+    <span>Welcome, {{ getCurrentUser()?.name }}</span>
+    <span class="role-badge">{{ getCurrentUser()?.role }}</span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="/dashboard">Dashboard</a>
+      <a mat-menu-item routerLink="/admin" *ngIf="isAdmin()">Admin Panel</a>
+      <a mat-menu-item routerLink="/teacher" *ngIf="isTeacher()">Teacher Panel</a>
+      <a mat-menu-item routerLink="/student" *ngIf="isStudent()">Student Panel</a>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

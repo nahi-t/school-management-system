@@ -1,0 +1,59 @@
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage users, subjects, and grades</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <mat-card class="dashboard-card" (click)="navigateToUsers()">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>people</mat-icon>
+          User Management
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Manage teachers, students, and their roles</p>
+        <ul>
+          <li>Add new users</li>
+          <li>Edit user information</li>
+          <li>Assign roles and permissions</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card" (click)="navigateToSubjects()">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>book</mat-icon>
+          Subject Management
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Manage school subjects and assignments</p>
+        <ul>
+          <li>Create new subjects</li>
+          <li>Assign teachers to subjects</li>
+          <li>Manage subject descriptions</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="dashboard-card" (click)="navigateToGrades()">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>class</mat-icon>
+          Grade Management
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Manage grades and class assignments</p>
+        <ul>
+          <li>Create new grades</li>
+          <li>Assign teachers to grades</li>
+          <li>Manage student enrollments</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

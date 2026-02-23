@@ -1,0 +1,24 @@
+<div class="unauthorized-container">
+  <mat-card class="unauthorized-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon color="warn">error</mat-icon>
+        Access Denied
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>You don't have permission to access this page.</p>
+      <p>Please contact your administrator if you believe this is an error.</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goToDashboard()">
+        <mat-icon>dashboard</mat-icon>
+        Go to Dashboard
+      </button>
+      <button mat-stroked-button (click)="goToLogin()">
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,63 @@
+<div class="user-management">
+  <div class="page-header">
+    <h1>User Management</h1>
+    <button mat-raised-button color="primary" (click)="openUserDialog()">
+      <mat-icon>add</mat-icon>
+      Add New User
+    </button>
+  </div>
+
+  <div class="content">
+    <mat-card>
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="users" class="user-table">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let user">{{ user.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef>Role</th>
+              <td mat-cell *matCellDef="let user">
+                <span class="role-badge role-{{ user.role }}">
+                  {{ user.role | titlecase }}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let user">
+                <div class="action-buttons">
+                  <button mat-icon-button color="primary" (click)="openUserDialog(user)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="deleteUser(user)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <div *ngIf="isLoading" class="loading-container">
+            <mat-spinner></mat-spinner>
+          </div>
+
+          <div *ngIf="!isLoading && users.length === 0" class="no-data">
+            <p>No users found. Click "Add New User" to create one.</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

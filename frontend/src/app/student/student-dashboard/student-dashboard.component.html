@@ -1,0 +1,62 @@
+<div class="student-dashboard">
+  <div class="dashboard-header">
+    <h1>Student Dashboard</h1>
+    <p>Welcome, {{ currentUser?.name }}! View your grades and academic progress.</p>
+  </div>
+
+  <div class="summary-section">
+    <mat-card class="summary-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>assessment</mat-icon>
+          Academic Summary
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="summary-stats">
+          <div class="stat-item">
+            <span class="stat-label">Average Marks:</span>
+            <span class="stat-value">{{ getAverageMarks() }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Total Subjects:</span>
+            <span class="stat-value">{{ marks.length }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="marks-section">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>My Grades</mat-card-title>
+        <mat-card-subtitle>View your marks for all subjects</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="isLoading" class="loading-container">
+          <mat-spinner></mat-spinner>
+        </div>
+
+        <div *ngIf="!isLoading && marks.length === 0" class="no-data">
+          <p>No marks available yet. Your grades will appear here once teachers assign them.</p>
+        </div>
+
+        <div class="marks-grid" *ngIf="!isLoading && marks.length > 0">
+          <mat-card class="mark-card" *ngFor="let mark of marks">
+            <mat-card-content>
+              <h3>{{ mark.subject.name }}</h3>
+              <p class="subject-info">{{ mark.grade.name }} - {{ mark.term }}</p>
+              <div class="mark-display">
+                <span class="mark-value" [ngClass]="getGradeClass(mark.marks)">
+                  {{ mark.marks }}
+                </span>
+                <span class="mark-grade">{{ getGradeClass(mark.marks).replace('grade-', '').toUpperCase() }}</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

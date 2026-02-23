@@ -1,0 +1,36 @@
+.dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-section,
+.features-section,
+.quick-actions {
+  margin-bottom: 24px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+mat-card-title mat-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+mat-list-item {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+mat-list-item:last-child {
+  border-bottom: none;
+}

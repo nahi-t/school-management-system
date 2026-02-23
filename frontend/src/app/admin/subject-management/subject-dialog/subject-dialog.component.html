@@ -1,0 +1,39 @@
+<form [formGroup]="subjectForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>{{ isEdit ? 'Edit Subject' : 'Add New Subject' }}</h2>
+  
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Subject Name</mat-label>
+      <input matInput formControlName="name" type="text" placeholder="Enter subject name">
+      <mat-icon matSuffix>book</mat-icon>
+      <mat-error *ngIf="subjectForm.get('name')?.hasError('required')">
+        Subject name is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter subject description" rows="3"></textarea>
+      <mat-icon matSuffix>description</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Assigned Teacher</mat-label>
+      <mat-select formControlName="assignedTeacher">
+        <mat-option value="">No teacher assigned</mat-option>
+        <mat-option *ngFor="let teacher of data.teachers" [value]="teacher._id">
+          {{ teacher.name }} ({{ teacher.email }})
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="subjectForm.invalid || isLoading">
+      <span *ngIf="!isLoading">{{ isEdit ? 'Update' : 'Create' }}</span>
+      <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+    </button>
+  </mat-dialog-actions>
+</form>

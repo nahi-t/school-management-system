@@ -1,0 +1,56 @@
+<div class="dashboard-container">
+  <div class="welcome-section">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>dashboard</mat-icon>
+          {{ getWelcomeMessage() }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>This is your personalized dashboard. Navigate to your specific role panel using the menu above.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="features-section">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Your Features</mat-card-title>
+        <mat-card-subtitle>Available functionalities based on your role</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let feature of getRoleFeatures()">
+            <mat-icon matListIcon>check_circle</mat-icon>
+            {{ feature }}
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="quick-actions">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Quick Actions</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="action-buttons">
+          <button mat-raised-button color="primary" routerLink="/admin" *ngIf="currentUser?.role === 'admin'">
+            <mat-icon>admin_panel_settings</mat-icon>
+            Admin Panel
+          </button>
+          <button mat-raised-button color="accent" routerLink="/teacher" *ngIf="currentUser?.role === 'teacher'">
+            <mat-icon>school</mat-icon>
+            Teacher Panel
+          </button>
+          <button mat-raised-button color="warn" routerLink="/student" *ngIf="currentUser?.role === 'student'">
+            <mat-icon>person</mat-icon>
+            Student Panel
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

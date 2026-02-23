@@ -1,0 +1,73 @@
+<div class="grade-management">
+  <div class="page-header">
+    <h1>Grade Management</h1>
+    <button mat-raised-button color="primary" (click)="openGradeDialog()">
+      <mat-icon>add</mat-icon>
+      Add New Grade
+    </button>
+  </div>
+
+  <div class="content">
+    <mat-card>
+      <mat-card-content>
+        <div class="table-container">
+          <table mat-table [dataSource]="grades" class="grade-table">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Grade Name</th>
+              <td mat-cell *matCellDef="let grade">{{ grade.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let grade">{{ grade.description || 'No description' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="assignedTeacher">
+              <th mat-header-cell *matHeaderCellDef>Assigned Teacher</th>
+              <td mat-cell *matCellDef="let grade">
+                <span *ngIf="grade.assignedTeacher">
+                  {{ grade.assignedTeacher.name }}
+                </span>
+                <span *ngIf="!grade.assignedTeacher" class="no-teacher">
+                  No teacher assigned
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="studentsCount">
+              <th mat-header-cell *matHeaderCellDef>Students</th>
+              <td mat-cell *matCellDef="let grade">
+                <span class="student-count">{{ getStudentsCount(grade) }}</span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let grade">
+                <div class="action-buttons">
+                  <button mat-icon-button color="primary" (click)="openGradeDialog(grade)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-icon-button color="warn" (click)="deleteGrade(grade)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <div *ngIf="isLoading" class="loading-container">
+            <mat-spinner></mat-spinner>
+          </div>
+
+          <div *ngIf="!isLoading && grades.length === 0" class="no-data">
+            <p>No grades found. Click "Add New Grade" to create one.</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

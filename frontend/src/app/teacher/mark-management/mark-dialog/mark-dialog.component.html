@@ -1,0 +1,80 @@
+<form [formGroup]="markForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>{{ isEdit ? 'Edit Mark' : 'Add New Mark' }}</h2>
+  
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Student</mat-label>
+      <mat-select formControlName="student">
+        <mat-option *ngFor="let student of data.students" [value]="student._id">
+          {{ student.name }} ({{ student.email }})
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-error *ngIf="markForm.get('student')?.hasError('required')">
+        Student is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Subject</mat-label>
+      <mat-select formControlName="subject">
+        <mat-option *ngFor="let subject of data.subjects" [value]="subject._id">
+          {{ subject.name }}
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>book</mat-icon>
+      <mat-error *ngIf="markForm.get('subject')?.hasError('required')">
+        Subject is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Grade</mat-label>
+      <mat-select formControlName="grade">
+        <mat-option *ngFor="let grade of data.grades" [value]="grade._id">
+          {{ grade.name }}
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>class</mat-icon>
+      <mat-error *ngIf="markForm.get('grade')?.hasError('required')">
+        Grade is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Marks (0-100)</mat-label>
+      <input matInput formControlName="marks" type="number" placeholder="Enter marks">
+      <mat-icon matSuffix>assessment</mat-icon>
+      <mat-error *ngIf="markForm.get('marks')?.hasError('required')">
+        Marks are required
+      </mat-error>
+      <mat-error *ngIf="markForm.get('marks')?.hasError('min')">
+        Marks must be at least 0
+      </mat-error>
+      <mat-error *ngIf="markForm.get('marks')?.hasError('max')">
+        Marks must be at most 100
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Term</mat-label>
+      <mat-select formControlName="term">
+        <mat-option *ngFor="let term of terms" [value]="term">
+          {{ term }}
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>event</mat-icon>
+      <mat-error *ngIf="markForm.get('term')?.hasError('required')">
+        Term is required
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="markForm.invalid || isLoading">
+      <span *ngIf="!isLoading">{{ isEdit ? 'Update' : 'Create' }}</span>
+      <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+    </button>
+  </mat-dialog-actions>
+</form>

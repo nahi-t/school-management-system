@@ -1,0 +1,26 @@
+<div class="teacher-dashboard">
+  <div class="dashboard-header">
+    <h1>Teacher Dashboard</h1>
+    <p>Welcome, {{ currentUser?.name }}! Manage your classes and student marks.</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <mat-card class="dashboard-card" (click)="navigateToMarks()">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>assessment</mat-icon>
+          Mark Management
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Assign and manage student marks</p>
+        <ul>
+          <li>View assigned students</li>
+          <li>Assign marks for subjects</li>
+          <li>Track student progress</li>
+          <li>Generate reports</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

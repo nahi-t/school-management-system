@@ -20,3 +20,6 @@ export const getApiUrl = () => {
 export const getFallbackApiUrl = () => {
   return 'https://school-management-system-swti.onrender.com/api';
 };
+
+// Force recompilation trigger
+export const VERSION = '1.0.1';

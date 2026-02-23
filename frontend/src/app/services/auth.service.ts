@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<User> {
-    const apiUrl = `${this.apiUrl}/login`;
+    const apiUrl = `${this.apiUrl}/auth/login`;
     console.log('AuthService: Login API URL:', apiUrl);
     console.log('AuthService: Login payload:', { email, password });
     
@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string, role: string): Observable<User> {
-    const apiUrl = `${this.apiUrl}/register`;
+    const apiUrl = `${this.apiUrl}/auth/register`;
     console.log('AuthService: Register API URL:', apiUrl);
     console.log('AuthService: Register payload:', { name, email, password, role });
     

@@ -37,6 +37,11 @@ const subjectsRouter = require('./routes/subjects');
 const gradesRouter = require('./routes/grades');
 const marksRouter = require('./routes/marks');
 
+// Add a simple test endpoint
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'API routes are working!', timestamp: new Date().toISOString() });
+});
+
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/subjects', subjectsRouter);

@@ -36,11 +36,20 @@ app.use((req, res, next) => {
   next();
 });
 
+// Mount API routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/subjects', require('./routes/subjects'));
 app.use('/api/grades', require('./routes/grades'));
 app.use('/api/marks', require('./routes/marks'));
+
+// Debug: Log registered routes
+console.log('API Routes mounted:');
+console.log('- /api/auth -> auth routes');
+console.log('- /api/users -> user routes');
+console.log('- /api/subjects -> subject routes');
+console.log('- /api/grades -> grade routes');
+console.log('- /api/marks -> mark routes');
 
 /* =============== PRODUCTION CONFIG =============== */
 

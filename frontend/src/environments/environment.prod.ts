@@ -7,7 +7,9 @@ export const environment = {
 export const getApiUrl = () => {
   const currentHost = window.location.origin;
   
-  if (currentHost.includes('school-management-system-1-sm6u.onrender.com')) {
+  if (currentHost.includes('school-management-system-theta-black-nahi.vercel.app')) {
+    return 'https://school-management-system-swti.onrender.com/api';
+  } else if (currentHost.includes('school-management-system-1-sm6u.onrender.com')) {
     return 'https://school-management-system-1-sm6u.onrender.com/api';
   } else if (currentHost.includes('school-management-system-swti.onrender.com')) {
     return 'https://school-management-system-swti.onrender.com/api';
@@ -26,4 +28,4 @@ export const getFallbackApiUrl = () => {
 };
 
 // Force recompilation trigger
-export const VERSION = '1.0.2';
+export const VERSION = '1.0.3';

@@ -8,6 +8,11 @@ dotenv.config();
 
 const app = express();
 
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+}
+
 app.use(cors({
   origin: ['https://school-management-system-swti.onrender.com', 'http://localhost:4200'],
   credentials: true

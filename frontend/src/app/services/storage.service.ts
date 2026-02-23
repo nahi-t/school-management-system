@@ -7,24 +7,52 @@ export class StorageService {
   private readonly STORAGE_KEY = 'currentUser';
 
   constructor() {
+    console.log('StorageService: Initializing storage service...');
+  
     // Listen for storage changes across tabs
-    window.addEventListener('storage', (event) => {
-      if (event.key === this.STORAGE_KEY) {
-        window.location.reload();
-      }
-    });
+    if (typeof window !== 'undefined') {
+      window.addEventListener('storage', (event) => {
+        console.log('StorageService: Storage event detected:', event.key, event.newValue);
+        if (event.key === this.STORAGE_KEY && event.newValue) {
+          console.log('StorageService: User data changed, reloading page...');
+          window.location.reload();
+        }
+      });
+    } else {
+      console.log('StorageService: Window not available, using fallback');
+    }
   }
 
   setUser(user: any): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+      console.log('StorageService: User stored successfully:', user);
+    } catch (error) {
+      console.error('StorageService: Error storing user:', error);
+    }
   }
 
   getUser(): any {
-    const stored = localStorage.getItem(this.STORAGE_KEY);
-    return stored ? JSON.parse(stored) : null;
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      if (stored) {
+        const user = JSON.parse(stored);
+        console.log('StorageService: User retrieved successfully:', user);
+        return user;
+      }
+      return null;
+    } catch (error) {
+      console.error('StorageService: Error retrieving user:', error);
+      return null;
+    }
   }
 
   removeUser(): void {
-    localStorage.removeItem(this.STORAGE_KEY);
+    try {
+      localStorage.removeItem(this.STORAGE_KEY);
+      console.log('StorageService: User removed successfully');
+    } catch (error) {
+      console.error('StorageService: Error removing user:', error);
+    }
   }
 }

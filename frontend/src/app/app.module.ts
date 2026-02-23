@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 import { MaterialModule } from './material.module';
 import { CoreModule } from './core/core.module';
@@ -18,7 +19,8 @@ import { CoreModule } from './core/core.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

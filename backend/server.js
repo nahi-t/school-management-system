@@ -11,7 +11,13 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: ['https://school-management-system-swti.onrender.com', 'http://localhost:4200'],
+  origin: [
+    'https://school-management-system-swti.onrender.com',
+    'https://school-management-system-1-sm6u.onrender.com',
+    'https://your-frontend-domain.vercel.app',
+    'https://your-frontend-domain.netlify.app',
+    'http://localhost:4200'
+  ],
   credentials: true
 }));
 
@@ -31,17 +37,10 @@ app.use('/api/marks', require('./routes/marks'));
 
 /* =============== PRODUCTION CONFIG =============== */
 
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '../frontend/dist');
-
-  // Serve Angular static files
-  app.use(express.static(frontendPath));
-
-  // Angular SPA fallback (VERY IMPORTANT)
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-  });
-}
+// Handle 404 for API routes
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ message: 'API endpoint not found' });
+});
 
 /* ================= START SERVER ================= */
 

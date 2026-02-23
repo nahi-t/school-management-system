@@ -16,7 +16,7 @@ export interface Grade {
   providedIn: 'root'
 })
 export class GradeService {
-  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/grades') : 'http://localhost:5000/api/grades';
+  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/grades') : getFallbackApiUrl().replace('/api/auth', '/api/grades');
 
   constructor(private http: HttpClient) {}
 

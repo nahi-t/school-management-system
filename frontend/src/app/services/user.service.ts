@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment, getApiUrl } from '../../environments/environment.prod';
+import { environment, getApiUrl, getFallbackApiUrl } from '../../environments/environment.prod';
 
 export interface User {
   _id: string;
@@ -18,7 +18,7 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/users') : 'http://localhost:5000/api/users';
+  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/users') : getFallbackApiUrl().replace('/api/auth', '/api/users');
 
   constructor(private http: HttpClient) {}
 

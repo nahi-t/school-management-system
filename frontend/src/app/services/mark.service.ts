@@ -19,7 +19,7 @@ export interface Mark {
   providedIn: 'root'
 })
 export class MarkService {
-  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/marks') : 'http://localhost:5000/api/marks';
+  private apiUrl = environment.production ? getApiUrl().replace('/api/auth', '/api/marks') : getFallbackApiUrl().replace('/api/auth', '/api/marks');
 
   constructor(private http: HttpClient) {}
 

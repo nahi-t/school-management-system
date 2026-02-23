@@ -11,6 +11,10 @@ export const getApiUrl = () => {
     return 'https://school-management-system-1-sm6u.onrender.com/api';
   } else if (currentHost.includes('school-management-system-swti.onrender.com')) {
     return 'https://school-management-system-swti.onrender.com/api';
+  } else if (currentHost.includes('vercel.app')) {
+    return 'https://school-management-system-swti.onrender.com/api';
+  } else if (currentHost.includes('netlify.app')) {
+    return 'https://school-management-system-swti.onrender.com/api';
   } else {
     return 'https://school-management-system-swti.onrender.com/api';
   }
@@ -22,4 +26,4 @@ export const getFallbackApiUrl = () => {
 };
 
 // Force recompilation trigger
-export const VERSION = '1.0.1';
+export const VERSION = '1.0.2';

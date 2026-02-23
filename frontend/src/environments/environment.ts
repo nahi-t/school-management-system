@@ -1,6 +1,6 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://school-management-system-swti.onrender.com/api'
+  production: false,
+  apiUrl: 'http://localhost:5000/api'
 };
 
 // Dynamic API URL based on current domain
@@ -12,11 +12,11 @@ export const getApiUrl = () => {
   } else if (currentHost.includes('school-management-system-swti.onrender.com')) {
     return 'https://school-management-system-swti.onrender.com/api';
   } else {
-    return 'https://school-management-system-swti.onrender.com/api';
+    return 'http://localhost:5000/api';
   }
 };
 
 // Fallback API URL for when dynamic detection fails
 export const getFallbackApiUrl = () => {
-  return 'https://school-management-system-swti.onrender.com/api';
+  return 'http://localhost:5000/api';
 };

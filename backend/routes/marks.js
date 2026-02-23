@@ -110,6 +110,9 @@ router.post('/', auth, authorize('admin', 'teacher'), [
   body('term').isIn(['Term 1', 'Term 2', 'Term 3', 'Final']).withMessage('Valid term is required')
 ], async (req, res) => {
   try {
+    console.log('Mark creation request - User:', req.user);
+    console.log('Mark creation request - Body:', req.body);
+    
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
@@ -120,8 +123,16 @@ router.post('/', auth, authorize('admin', 'teacher'), [
     }
 
     if (req.user.role === 'teacher') {
+      console.log('Teacher validation - User ID:', req.user.id);
+      console.log('Teacher validation - Subject ID:', subject);
+      
       const subjectData = await Subject.findById(subject);
+      console.log('Subject data:', subjectData);
+      
       if (!subjectData || !subjectData.assignedTeacher || subjectData.assignedTeacher.toString() !== req.user.id) {
+        console.log('Access denied - Teacher not assigned to subject');
+        console.log('Expected teacher ID:', subjectData?.assignedTeacher?.toString());
+        console.log('Actual user ID:', req.user.id);
         return res.status(403).json({ message: 'Access denied - You are not assigned to this subject' });
       }
     }

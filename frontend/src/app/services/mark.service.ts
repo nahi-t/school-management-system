@@ -56,6 +56,9 @@ export class MarkService {
   }
 
   createMark(mark: Partial<Mark>): Observable<Mark> {
+    console.log('MarkService: createMark called with:', mark);
+    console.log('MarkService: Full URL:', this.marksUrl);
+    
     return this.http.post<Mark>(this.marksUrl, mark, { headers: this.getAuthHeaders() });
   }
 

@@ -26,10 +26,32 @@ export class AuthService {
     private router: Router
   ) {
     const storedUser = localStorage.getItem('currentUser');
-    this.currentUserSubject = new BehaviorSubject<User | null>(
-      storedUser ? JSON.parse(storedUser) : null
-    );
+    try {
+      this.currentUserSubject = new BehaviorSubject<User | null>(
+        storedUser ? JSON.parse(storedUser) : null
+      );
+    } catch (error) {
+      console.error('Error parsing stored user:', error);
+      localStorage.removeItem('currentUser');
+      this.currentUserSubject = new BehaviorSubject<User | null>(null);
+    }
     this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  initializeAuth(): void {
+    console.log('AuthService: Initializing authentication...');
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        this.currentUserSubject.next(user);
+        console.log('AuthService: User restored from localStorage:', user);
+      } catch (error) {
+        console.error('AuthService: Error restoring user:', error);
+        localStorage.removeItem('currentUser');
+        this.currentUserSubject.next(null);
+      }
+    }
   }
 
   public get currentUserValue(): User | null {
@@ -65,7 +87,22 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.currentUserValue;
+    const currentUser = this.currentUserSubject.value;
+    if (!currentUser) return false;
+    
+    // Check if token exists and is not expired
+    const token = currentUser.token;
+    if (!token) return false;
+    
+    try {
+      // Basic token validation (you can enhance this with JWT decoding)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const now = Date.now() / 1000;
+      return payload.exp > now;
+    } catch (error) {
+      console.error('Token validation error:', error);
+      return false;
+    }
   }
 
   hasRole(role: string): boolean {

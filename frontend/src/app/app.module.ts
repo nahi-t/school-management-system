@@ -11,9 +11,14 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RoleGuard } from './guards/role.guard';
 import { NotFoundComponent } from './not-found/not-found.component';
-
 import { MaterialModule } from './material.module';
 import { CoreModule } from './core/core.module';
+import { AppInitService } from './services/app-init.service';
+import { APP_INITIALIZER } from '@angular/core';
+
+function initializeApp(appInitService: AppInitService) {
+  return () => appInitService.initializeApp();
+}
 
 @NgModule({
   declarations: [
@@ -34,7 +39,14 @@ import { CoreModule } from './core/core.module';
   ],
   providers: [
     AuthGuard,
-    RoleGuard
+    RoleGuard,
+    AppInitService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp,
+      deps: [AppInitService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

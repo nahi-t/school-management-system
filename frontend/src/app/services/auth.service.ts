@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { StorageService } from './storage.service';
 
 export interface User {
   _id: string;
@@ -23,34 +24,20 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {
-    const storedUser = localStorage.getItem('currentUser');
-    try {
-      this.currentUserSubject = new BehaviorSubject<User | null>(
-        storedUser ? JSON.parse(storedUser) : null
-      );
-    } catch (error) {
-      console.error('Error parsing stored user:', error);
-      localStorage.removeItem('currentUser');
-      this.currentUserSubject = new BehaviorSubject<User | null>(null);
-    }
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.initializeAuth();
   }
 
   initializeAuth(): void {
     console.log('AuthService: Initializing authentication...');
-    const storedUser = localStorage.getItem('currentUser');
+    const storedUser = this.storageService.getUser();
     if (storedUser) {
-      try {
-        const user = JSON.parse(storedUser);
-        this.currentUserSubject.next(user);
-        console.log('AuthService: User restored from localStorage:', user);
-      } catch (error) {
-        console.error('AuthService: Error restoring user:', error);
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
-      }
+      this.currentUserSubject.next(storedUser);
+      console.log('AuthService: User restored from storage:', storedUser);
+    } else {
+      console.log('AuthService: No stored user found');
     }
   }
 
@@ -63,9 +50,18 @@ export class AuthService {
       .pipe(map(response => {
         const user = response.user;
         user.token = response.token;
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
+        
+        // Store user with timestamp for debugging
+        const userWithTimestamp = {
+          ...user,
+          loginTime: new Date().toISOString()
+        };
+        
+        this.storageService.setUser(userWithTimestamp);
+        this.currentUserSubject.next(userWithTimestamp);
+        
+        console.log('AuthService: User logged in:', userWithTimestamp);
+        return userWithTimestamp;
       }));
   }
 
@@ -74,14 +70,14 @@ export class AuthService {
       .pipe(map(response => {
         const user = response.user;
         user.token = response.token;
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.storageService.setUser(user);
         this.currentUserSubject.next(user);
         return user;
       }));
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
+    this.storageService.removeUser();
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }

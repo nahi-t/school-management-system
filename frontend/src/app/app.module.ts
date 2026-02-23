@@ -14,6 +14,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material.module';
 import { CoreModule } from './core/core.module';
 import { AppInitService } from './services/app-init.service';
+import { StorageService } from './services/storage.service';
 import { APP_INITIALIZER } from '@angular/core';
 
 function initializeApp(appInitService: AppInitService) {
@@ -41,6 +42,7 @@ function initializeApp(appInitService: AppInitService) {
     AuthGuard,
     RoleGuard,
     AppInitService,
+    StorageService,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,

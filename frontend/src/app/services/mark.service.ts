@@ -44,26 +44,26 @@ export class MarkService {
   }
 
   getAllMarks(): Observable<Mark[]> {
-    return this.http.get<Mark[]>(this.apiUrl, { headers: this.getAuthHeaders() });
+    return this.http.get<Mark[]>(this.marksUrl, { headers: this.getAuthHeaders() });
   }
 
   getMarksByStudent(studentId: string): Observable<Mark[]> {
-    return this.http.get<Mark[]>(`${this.apiUrl}/student/${studentId}`, { headers: this.getAuthHeaders() });
+    return this.http.get<Mark[]>(`${this.marksUrl}/student/${studentId}`, { headers: this.getAuthHeaders() });
   }
 
   getMarksBySubject(subjectId: string): Observable<Mark[]> {
-    return this.http.get<Mark[]>(`${this.apiUrl}/subject/${subjectId}`, { headers: this.getAuthHeaders() });
+    return this.http.get<Mark[]>(`${this.marksUrl}/subject/${subjectId}`, { headers: this.getAuthHeaders() });
   }
 
   createMark(mark: Partial<Mark>): Observable<Mark> {
-    return this.http.post<Mark>(this.apiUrl, mark, { headers: this.getAuthHeaders() });
+    return this.http.post<Mark>(this.marksUrl, mark, { headers: this.getAuthHeaders() });
   }
 
   updateMark(id: string, mark: Partial<Mark>): Observable<Mark> {
-    return this.http.put<Mark>(`${this.apiUrl}/${id}`, mark, { headers: this.getAuthHeaders() });
+    return this.http.put<Mark>(`${this.marksUrl}/${id}`, mark, { headers: this.getAuthHeaders() });
   }
 
   deleteMark(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.delete<void>(`${this.marksUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 }

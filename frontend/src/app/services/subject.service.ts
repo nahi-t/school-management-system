@@ -119,7 +119,7 @@ export class SubjectService {
     }
 
     return this.http.post<Subject>(
-      `${this.apiUrl}/${subjectId}/assign-teacher`,
+      `${this.subjectsUrl}/${subjectId}/assign-teacher`,
       { teacherId },
       { headers: this.getAuthHeaders() }
     );

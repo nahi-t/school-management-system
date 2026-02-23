@@ -41,37 +41,40 @@ export class GradeService {
   }
 
   getAllGrades(): Observable<Grade[]> {
-    return this.http.get<Grade[]>(this.apiUrl, { headers: this.getAuthHeaders() });
+    return this.http.get<Grade[]>(this.gradesUrl, { headers: this.getAuthHeaders() });
   }
 
   getGradeById(id: string): Observable<Grade> {
-    return this.http.get<Grade>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.get<Grade>(`${this.gradesUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
   createGrade(grade: Partial<Grade>): Observable<Grade> {
-    return this.http.post<Grade>(this.apiUrl, grade, { headers: this.getAuthHeaders() });
+    return this.http.post<Grade>(this.gradesUrl, grade, { headers: this.getAuthHeaders() });
   }
 
   updateGrade(id: string, grade: Partial<Grade>): Observable<Grade> {
-    return this.http.put<Grade>(`${this.apiUrl}/${id}`, grade, { headers: this.getAuthHeaders() });
+    return this.http.put<Grade>(`${this.gradesUrl}/${id}`, grade, { headers: this.getAuthHeaders() });
   }
 
   deleteGrade(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+    return this.http.delete<void>(`${this.gradesUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
   assignTeacher(gradeId: string, teacherId: string): Observable<Grade> {
-    return this.http.post<Grade>(`${this.apiUrl}/${gradeId}/assign-teacher`, 
-      { teacherId }, { headers: this.getAuthHeaders() });
+    console.log('GradeService: assignTeacher called with gradeId:', gradeId, 'teacherId:', teacherId);
+    console.log('GradeService: Full URL:', `${this.gradesUrl}/${gradeId}/assign-teacher`);
+    
+    return this.http.post<Grade>(`${this.gradesUrl}/${gradeId}/assign-teacher`, 
+       { teacherId }, { headers: this.getAuthHeaders() });
   }
 
   addStudent(gradeId: string, studentId: string): Observable<Grade> {
-    return this.http.post<Grade>(`${this.apiUrl}/${gradeId}/add-student`, 
+    return this.http.post<Grade>(`${this.gradesUrl}/${gradeId}/add-student`, 
       { studentId }, { headers: this.getAuthHeaders() });
   }
 
   addSubject(gradeId: string, subjectId: string): Observable<Grade> {
-    return this.http.post<Grade>(`${this.apiUrl}/${gradeId}/add-subject`, 
+    return this.http.post<Grade>(`${this.gradesUrl}/${gradeId}/add-subject`, 
       { subjectId }, { headers: this.getAuthHeaders() });
   }
 }

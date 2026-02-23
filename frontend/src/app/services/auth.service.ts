@@ -51,7 +51,10 @@ export class AuthService {
     console.log('AuthService: Login API URL:', apiUrl);
     console.log('AuthService: Login payload:', { email, password });
     
-    return this.http.post<any>(apiUrl, { email, password })
+    const headers = { 'Content-Type': 'application/json' };
+    console.log('AuthService: Request headers:', headers);
+    
+    return this.http.post<any>(apiUrl, { email, password }, { headers })
       .pipe(map(response => {
         const user = response.user;
         user.token = response.token;
@@ -75,7 +78,10 @@ export class AuthService {
     console.log('AuthService: Register API URL:', apiUrl);
     console.log('AuthService: Register payload:', { name, email, password, role });
     
-    return this.http.post<any>(apiUrl, { name, email, password, role })
+    const headers = { 'Content-Type': 'application/json' };
+    console.log('AuthService: Request headers:', headers);
+    
+    return this.http.post<any>(apiUrl, { name, email, password, role }, { headers })
       .pipe(map(response => {
         const user = response.user;
         user.token = response.token;

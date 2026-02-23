@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment, getApiUrl } from '../../environments/environment';
+import { environment, getApiUrl } from '../../environments/environment.prod';
 
 export interface Mark {
   _id: string;              // ✅ FIXED (was id)

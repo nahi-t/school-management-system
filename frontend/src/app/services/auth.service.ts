@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment, getApiUrl } from '../../environments/environment';
+import { environment, getApiUrl } from '../../environments/environment.prod';
 import { StorageService } from './storage.service';
 
 export interface User {

@@ -47,7 +47,11 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<User> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
+    const apiUrl = `${this.apiUrl}/login`;
+    console.log('AuthService: Login API URL:', apiUrl);
+    console.log('AuthService: Login payload:', { email, password });
+    
+    return this.http.post<any>(apiUrl, { email, password })
       .pipe(map(response => {
         const user = response.user;
         user.token = response.token;
@@ -67,7 +71,11 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string, role: string): Observable<User> {
-    return this.http.post<any>(`${this.apiUrl}/register`, { name, email, password, role })
+    const apiUrl = `${this.apiUrl}/register`;
+    console.log('AuthService: Register API URL:', apiUrl);
+    console.log('AuthService: Register payload:', { name, email, password, role });
+    
+    return this.http.post<any>(apiUrl, { name, email, password, role })
       .pipe(map(response => {
         const user = response.user;
         user.token = response.token;
